@@ -6,10 +6,48 @@ sources:
     tables:
       - name: sales
         identifier: raw_gz_sales
+        description: sales for gwz | we have one row per productid found in each orders_id
+        freshness: 
+          warn_after:
+            count: 90
+            period: day
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: foreign key to ship
+          - name: pdt_id
+            description: foreign key to product
+          - name: revenue
+            description: amount paid by the customer to purchase the product. revenue = quantity * selling price 
+          - name: quantity
+            description: quantity of products purchased for this order
       - name: product
         identifier: raw_gz_product
+        description: products of gwz
+        columns:
+          - name: products_id
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+          - name: purchase_price
+            description: purchase price of the product
       - name: ship
         identifier: raw_gz_ship
-        description: shipped products
+        description: ship of gwz
+        columns:
+          - name: orders_id
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: price paid by the customer for shipping
+          - name: log_cost
+            description: cost of preparing the parcel in the warehouse
+          - name: ship_cost
+            description: shipping cost paid by gwz to the carrier
 
       
