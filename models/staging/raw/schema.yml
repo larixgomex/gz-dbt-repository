@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stg_raw_product
+  - name: stg_raw_sales
+  - name: stg_raw_ship
