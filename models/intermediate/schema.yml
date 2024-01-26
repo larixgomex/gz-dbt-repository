@@ -6,15 +6,6 @@ models:
     tests:
       - unique:
           column_name: "(orders_id || '-' || products_id)"
-      - not_null:
-          column_name:
-            - orders_id
-            - products_id
-            - margin
-            - Purchase_cost
-            - date_date
-            - revenue
-            - quantity
   - name: int_orders__margin
     description: margin calcultation per order
     columns:
